@@ -1,10 +1,13 @@
 package com.example.projectSM.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Document(collection = "User")
 public class User implements Serializable{
@@ -15,6 +18,9 @@ public class User implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	
+	@DocumentReference(lazy = true)
+	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
 		
@@ -28,6 +34,14 @@ public class User implements Serializable{
 
 	public String getId() {
 		return id;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public void setId(String id) {
