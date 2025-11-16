@@ -1,21 +1,21 @@
 package com.example.projectSM.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 public class CommentDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private String text;
-	private Date date;
+	private Instant date;
 	private AuthorDTO author;
 	
 	public CommentDTO() {
 		
 	}
 
-	public CommentDTO(String text, Date date, AuthorDTO author) {
+	public CommentDTO(String text, Instant date, AuthorDTO author) {
 		this.text = text;
 		this.date = date;
 		this.author = author;
@@ -29,11 +29,11 @@ public class CommentDTO implements Serializable{
 		this.text = text;
 	}
 
-	public Date getDate() {
+	public Instant getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Instant date) {
 		this.date = date;
 	}
 

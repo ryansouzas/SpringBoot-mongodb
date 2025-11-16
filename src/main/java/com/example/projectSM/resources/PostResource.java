@@ -1,5 +1,6 @@
 package com.example.projectSM.resources;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,15 @@ public class PostResource {
 		return ResponseEntity.ok().body((list));
 	}
 	
-
+	@GetMapping(value = "/fullsearch")
+	public ResponseEntity<List<Post>> fullSearch(
+			@RequestParam(defaultValue = "") String text,
+			@RequestParam(defaultValue = "") String minDate,
+			@RequestParam(defaultValue = "") String maxDate) {
+		String decodeText = URL.decodeParam(text);
+		Instant min = URL.convertDate(minDate, Instant.EPOCH);
+		Instant max = URL.convertDate(maxDate, Instant.now());
+		List<Post> list = service.fullSearch(decodeText, min, max);
+		return ResponseEntity.ok().body((list));
+	}
 }
